@@ -1,0 +1,289 @@
+﻿@page "/graphpage"
+@model GraphPageModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta lang="ru"/>
+    <title>Document</title>
+    <link rel="stylesheet" href="~/graph/style.css">
+</head>
+<body>
+    <header>
+        <div class="tool-box">
+            <form class="freq-form" asp-page="graphpage" method="post">
+                <div class="form-group">
+                    <label>min F, MHz</label>
+                    <input class="min-fr up-down" asp-for=MinFreq type="number"/>
+                    <div class="counter"> 
+                        <img class="plus-min" src="~/graph/images/plus.png"/>
+                        <img class="minus-min" src="~/graph/images/minus.png" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>max F, MHz</label>
+                    <input class="max-fr up-down" asp-for=MaxFreq type="number" />
+                    <div class="counter">
+                        <img class="plus-max" src="~/graph/images/plus.png" />
+                        <img class="minus-max" src="~/graph/images/minus.png" />
+                    </div>
+                </div>
+                <button type="submit">отправить</button>
+            </form>
+            <div class="swich-box">
+                <span>Неподтвержденные сигналы</span>
+                <div class="swich" on="true">
+                    <div class="swich-road">
+                        <div class="swich-head"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cur-freq-box">
+                <span class="info-title">Частота:  </span>
+                <span class="info-value-current"></span>
+            </div>
+            <a href="/mainpage" class="h-main">
+                главная
+            </a>
+        </div>
+    </header>
+    <section class="graph-container">
+        <div class="base-lines">
+
+            <div class="vert-point-line"></div>
+            <div class="hor-point-line"></div>
+
+            <div class="signal-info">
+                <table>
+                    <tr>
+                        <td><span class="info-title">Диапазон:  </span></td>
+                        <td><span class="info-value-range"></span></td>
+                        <td><span class="info-title">Поляризация:  </span></td>
+                        <td><span class="info-value-polar">0</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Частота, MHz:  </span></td>
+                        <td><span class="info-value-freq">0</span></td>
+                        <td><span class="info-title">Частота(L):  </span></td>
+                        <td><span class="info-value-freql">0</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Snos:  </span></td>
+                        <td><span class="info-value-snos">0</span></td>
+                        <td><span class="info-title">Скорость, KHz:  </span></td>
+                        <td><span class="info-value-band">0</span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">ОСШ:  </span></td>
+                        <td><span class="info-value-level">0</span></td>
+                        <td><span class="info-title">Модуляция:  </span></td>
+                        <td><span class="info-value-mod"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Доп. мод:  </span></td>
+                        <td><span class="info-value-dop-mod"></span></td>
+                        <td><span class="info-title">Тип ПУК:  </span></td>
+                        <td><span class="info-value-puk"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">ПУ-Дек:  </span></td>
+                        <td><span class="info-value-pudk"></span></td>
+                        <td><span class="info-title">CC:  </span></td>
+                        <td><span class="info-value-cc"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">P-C:  </span></td>
+                        <td><span class="info-value-pc"></span></td>
+                        <td><span class="info-title">AC:  </span></td>
+                        <td><span class="info-value-ac"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">IBS:  </span></td>
+                        <td><span class="info-value-ibs"></span></td>
+                        <td><span class="info-title">IDR:  </span></td>
+                        <td><span class="info-value-idr"></span></td>
+                    </tr> 
+                    <tr>
+                        <td><span class="info-title">Синхропр.:  </span></td>
+                        <td><span class="info-value-syncr"></span></td>
+                        <td><span class="info-title">DCME:  </span></td>
+                        <td><span class="info-value-dcme"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">ОКС:  </span></td>
+                        <td><span class="info-value-oks"></span></td>
+                        <td><span class="info-title">Откуда:  </span></td>
+                        <td><span class="info-value-from"></span></td>
+                    </tr>    
+                    <tr>
+                        <td><span class="info-title">Куда:  </span></td>
+                        <td><span class="info-value-to"></span></td>
+                        <td><span class="info-title">Протоколы:  </span></td>
+                        <td><span class="info-value-protocols"></span></td>
+                    </tr>                   
+                    <tr>
+                        <td><span class="info-title">IPSec:  </span></td>
+                        <td><span class="info-value-ip"></span></td>
+                        <td><span class="info-title">Информация:  </span></td>
+                        <td><span class="info-value-info"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Комментарии:  </span></td>
+                        <td><span class="info-value-comment"></span></td>
+                        <td><span class="info-title">Подтверждение:  </span></td>
+                        <td><span class="info-value-accept"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Значение:  </span></td>
+                        <td><span class="info-value-mean"></span></td>
+                        <td><span class="info-title">Дата:  </span></td>
+                        <td><span class="info-value-date"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span class="info-title">Оператор:  </span></td>
+                        <td><span class="info-value-operator"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <span class="dbl">P, Db</span>
+            <span class="mhz">F, MHz</span>
+            @if (Model.Sattellite != null)
+            {
+                if (Model.Sattellite.Signals.Count() > 0)
+                {
+                    foreach (var s in Model.Sattellite.Signals)
+                    {
+                        <div class="val"
+                            swich=@(s.Acception.ToLower().Contains("выкл") ? "0" : "1")
+                            mod="@s.Modulation"
+                            band="@s.SpeedKHz"
+                            f="@(s.FrequencyMHz*1000)"
+                            p="@s.SNR"
+                            range="@s.Range"
+                            polar="@s.Polarisation"
+                            freql="@s.BH_L"
+                            snos="@s.Snos"
+                            dop-mod="@s.Dop_Mod"
+                            puk="@s.Type_PUK"
+                            pudk="@s.PU_Dek"
+                            cc="@s.CC"
+                            pc="@s.P_C"
+                            ac="@s.AC"
+                            ibs="@s.IBS"
+                            idr="@s.IDR"
+                            syncr="@s.Syncrop"
+                            dcme="@s.DCME"
+                            oks="@s.OKS"
+                            from="@s.From"
+                            to="@s.To"
+                            protocols="@s.Protocols"
+                            ip="@s.IPSec"
+                            info="@s.Information"
+                            comment="@s.Comment"
+                            accept="@s.Acception"
+                            mean=@Model.GetNumber(s.OperativeMean, s)
+                            date="@s.AcceptionTime"
+                            operator="@s.Operator"
+                            >
+                            
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </section>
+
+    <script src="~/graph/script.js"></script>
+</body>
+</html>
+
+@functions{
+
+    public class GraphPageModel : PageModel
+    {
+        public Sattellite Sattellite { get; set; }
+
+        [BindProperty]
+        public double MinFreq { get; set; } = 0;
+
+        [BindProperty]
+        public double MaxFreq { get; set; } = 15000;
+
+        public int GetNumber(string value, ExcelSignalModel model)
+        {
+            if (model.RowNumber == 0 || model.OperativeMean == "НЕИЗВ")
+            {
+                return 111;
+            }
+
+            if (value == "ДРЗВД")
+            {
+                return 1;
+            }
+            if (value == "ЗАКР")
+            {
+                return 2;
+            }
+            if (value == "ИНФ")
+            {
+                return 3;
+            }
+            if (value == "НСШ")
+            {
+                return 4;
+            }
+            if (value == "ОА")
+            {
+                return 5;
+            }
+            if (value == "ПИ")
+            {
+                return 6;
+            }
+            if (value == "ТВ")
+            {
+                return 7;
+            }
+            if (value == "ХХ")
+            {
+                return 8;
+            }
+            else
+            {
+                return 0;
+            }
+
+            
+        }
+
+        public IActionResult OnGet()
+        {
+
+            string currentJsonString = HttpContext.Session.GetString("current");
+
+            if (!String.IsNullOrEmpty(currentJsonString))
+            {
+                Sattellite = JsonConvert.DeserializeObject<Sattellite>(currentJsonString);
+            }
+
+            return Page();
+        }
+
+        public IActionResult OnPost()
+        {
+            MinFreq = MinFreq;
+            MaxFreq = MaxFreq;
+
+            string currentJsonString = HttpContext.Session.GetString("current");
+
+            if (!String.IsNullOrEmpty(currentJsonString))
+            {
+                Sattellite = JsonConvert.DeserializeObject<Sattellite>(currentJsonString);
+            }
+
+            return Page();
+        }
+    }
+}

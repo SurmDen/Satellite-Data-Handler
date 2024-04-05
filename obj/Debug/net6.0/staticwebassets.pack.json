@@ -1,0 +1,125 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\DB\\database.db3",
+      "PackagePath": "staticwebassets\\DB\\database.db3"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\DB\\database_Ku-1_H.db3",
+      "PackagePath": "staticwebassets\\DB\\database_Ku-1_H.db3"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\DB\\database_Ku-1_H_09.09.2019.db3",
+      "PackagePath": "staticwebassets\\DB\\database_Ku-1_H_09.09.2019.db3"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\graph\\images\\minus.png",
+      "PackagePath": "staticwebassets\\graph\\images\\minus.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\graph\\images\\plus.png",
+      "PackagePath": "staticwebassets\\graph\\images\\plus.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\graph\\script.js",
+      "PackagePath": "staticwebassets\\graph\\script.js"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\graph\\style.css",
+      "PackagePath": "staticwebassets\\graph\\style.css"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\arrow-back-ios_119432.png",
+      "PackagePath": "staticwebassets\\main\\images\\arrow-back-ios_119432.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\document-add_114467.png",
+      "PackagePath": "staticwebassets\\main\\images\\document-add_114467.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-bat-with-sharp-wings-silhouette-30847.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-bat-with-sharp-wings-silhouette-30847.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-database-138935.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-database-138935.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-edit-4851691.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-edit-4851691.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-font-user-3917688.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-font-user-3917688.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-log-out-3177449.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-log-out-3177449.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-online-learning-1168495.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-online-learning-1168495.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-photo-685685.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-photo-685685.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-radar-7260338.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-radar-7260338.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\free-icon-upload-file-7233984.png",
+      "PackagePath": "staticwebassets\\main\\images\\free-icon-upload-file-7233984.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\homeregular_106344.png",
+      "PackagePath": "staticwebassets\\main\\images\\homeregular_106344.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\iconka-transformed.png",
+      "PackagePath": "staticwebassets\\main\\images\\iconka-transformed.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\iconka.png",
+      "PackagePath": "staticwebassets\\main\\images\\iconka.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\russia.jpg",
+      "PackagePath": "staticwebassets\\main\\images\\russia.jpg"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\ui_interface_direction_navigation_left_chevron_icon_219807.png",
+      "PackagePath": "staticwebassets\\main\\images\\ui_interface_direction_navigation_left_chevron_icon_219807.png"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\images\\usa.jpg",
+      "PackagePath": "staticwebassets\\main\\images\\usa.jpg"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\script.js",
+      "PackagePath": "staticwebassets\\main\\script.js"
+    },
+    {
+      "Id": "D:\\Портфолио\\SQLite_Parser\\SQLite_Parser\\wwwroot\\main\\style.css",
+      "PackagePath": "staticwebassets\\main\\style.css"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SQLite_Parser.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.SQLite_Parser.props",
+      "PackagePath": "build\\SQLite_Parser.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.SQLite_Parser.props",
+      "PackagePath": "buildMultiTargeting\\SQLite_Parser.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.SQLite_Parser.props",
+      "PackagePath": "buildTransitive\\SQLite_Parser.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

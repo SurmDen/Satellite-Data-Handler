@@ -1,0 +1,436 @@
+﻿@page "/mainpage"
+@model MainPageModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="~/main/style.css">
+    <title>Главная</title>
+</head>
+
+<body>
+    <header>
+        <img class="h-img" src="~/main/images/free-icon-database-138935.png" alt="">
+        <div class="h-title">
+            EXCEL EDITOR
+        </div>
+        <div class="load-box">
+            <form asp-page="mainpage" class="upl-form" method="POST" enctype="multipart/form-data">
+                <input asp-for=IsDbFileLoadingOp type="hidden" value="true" />
+                <input asp-for=file id="upload" type="file" class="upl-input">
+                <button type="submit" class="upl-btn">ЗАГРУЗИТЬ</button>
+                <div class="tool-box">
+                    <a class="h-graph" href="/graphpage">график</a>
+                    <label for="upload">
+                        <img class="upl-img" src="~/main/images/free-icon-upload-file-7233984.png" alt="">
+                    </label>
+                </div>
+            </form>
+        </div>
+    </header>
+    <section>
+        <div class="side-bar">
+            <div class="sb-title">
+                <div class="sb-title-name">
+                    экспорт базы данных
+                </div>
+                <div class="sb-title-error">
+                    (@(string.IsNullOrEmpty(Model.MessageHandler) ? "place for error messages" : Model.MessageHandler))
+                </div>
+            </div>
+            <div class="form">
+                <div class="form-title">
+                    <span> в рабочий каталог EXCEL</span>
+                    <ul>
+                        <li>
+                            сравнение с текущим каталогом
+                        </li>
+                        <li>
+                            обновление существующих данных
+                        </li>
+                        <li>
+                            добавление новых данных в таблицу
+                        </li>
+                    </ul>
+                </div>
+                <form asp-page="mainpage" method="POST">
+                    <input asp-for=IsAddToExists class="inp inp-pr" type="hidden" value="true">
+                    <button type="submit" class="btn btn-pr">ЭКСПОРТИРОВАТЬ</button>
+                </form>
+            </div>
+            <div class="prod-by"> 
+                <div>
+                    Prod. By
+                </div>
+                <span>
+                    Denis Surmanidze
+                </span>
+            </div>
+        </div>
+        <div class="main-page">
+            @if (Model.Sattellites != null)
+            {
+                if (Model.Sattellites.Count > 0)
+                {
+                    <div class="select-box">
+                        <form method="post" asp-action="mainpage">
+                            <select asp-for="SatName">
+                                @foreach (var sat in Model.Sattellites)
+                                {
+                                    <option value="@sat.ToString()">
+                                        @sat.ToString()
+                                    </option>
+                                }
+                            </select>
+                            <input asp-for="IsChangeNewSat" value="true" type="hidden" >
+                            <button type="submit" class="select-btn">загрузить</button>
+                        </form>
+                    </div>
+                }
+            }
+            <div class="tabled">
+                <table style="border:none; outline: none">
+                    <thead>
+                        <tr>
+                            <th>
+                                Полушарие
+                            </th>
+                            <th>
+                                Подсп. точка
+                            </th>
+                            <th>
+                                Частота, MHz
+                            </th>
+                            <th>
+                                Бод. скорость, KHz
+                            </th>
+                            <th>
+                                ОСШ
+                            </th>
+                            <th>
+                                Подтверждение
+                            </th>
+                            <th>
+                                Значение
+                            </th>
+                            <th>
+                                Время подтверждения
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ChangedSat != null)
+                        {
+                            if (Model.ChangedSat.Signals.Count() != 0)
+                            {
+                                foreach (var sm in Model.ChangedSat.Signals)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Model.ChangedSat.Way
+                                        </td>
+                                        <td>
+                                            @Model.ChangedSat.UnderlyingPoint
+                                        </td>
+                                        <td>
+                                            @sm.FrequencyMHz
+                                        </td>
+                                        <td>
+                                            @sm.SpeedKHz
+                                        </td>
+                                        <td>
+                                            @sm.SNR
+                                        </td>
+                                        <td>
+                                            @sm.Acception
+                                        </td>
+                                        <td>
+                                            @sm.OperativeMean
+                                        </td>
+                                        <td>
+                                            @sm.AcceptionTime
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <script src="~/main/script.js"></script>
+</body>
+
+</html>
+
+@functions{
+    public class MainPageModel : PageModel
+    {
+        private IWebHostEnvironment hostEnvironment;
+        private ISQLiteHandler sqliteHandler;
+        private IExcelParser excelParser;
+
+        public MainPageModel(IWebHostEnvironment env, ISQLiteHandler sqlite, IExcelParser excel)
+        {
+            hostEnvironment = env;
+            sqliteHandler = sqlite;
+            excelParser = excel;
+        }
+
+        public List<SignalModel>? Models { get; set; }
+
+        [BindProperty]
+        public IFormFile file { get; set; }
+
+        public string DefaultPath { get; set; }
+
+        [BindProperty]
+        public bool IsAddToExists { get; set; } = false;
+
+        [BindProperty]
+        public bool IsChangeNewSat { get; set; }
+
+        [BindProperty]
+        public bool IsDbFileLoadingOp { get; set; } = false;
+
+        public List<Sattellite> Sattellites { get; set; }
+
+        public Sattellite ChangedSat { get; set; }
+
+        [BindProperty]
+        public string SatName { get; set; }
+
+        public string MessageHandler { get; set; }
+
+        public IActionResult OnGet()
+        {
+            string? satJsonString = HttpContext.Session.GetString("sat");
+
+            if (string.IsNullOrEmpty(satJsonString))
+            {
+                DirectoryInfo directoryInfo = new DirectoryInfo($"{hostEnvironment.WebRootPath}/../Excel");
+
+                try
+                {
+                    FileInfo file = directoryInfo.GetFiles().First(f => f.Name.Contains(".xlsx"));
+
+                    DefaultPath = file.FullName;
+
+                    HttpContext.Session.SetString("path", DefaultPath);
+
+                    Sattellites = excelParser.GetSattelitesWithParamsFromExcel(DefaultPath);
+
+                    HttpContext.Session.SetString("sat", JsonConvert.SerializeObject(Sattellites));
+                }
+                catch(Exception ex)
+                {
+                    MessageHandler = $"Put excel file to directory:  {directoryInfo.FullName}";
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            else
+            {
+                Sattellites = JsonConvert.DeserializeObject<List<Sattellite>>(satJsonString);
+            }
+
+            string? satName = HttpContext.Session.GetString("satname");
+
+            if (!string.IsNullOrEmpty(satName))
+            {
+                SatName = satName;
+            }
+
+            if (ChangedSat == null)
+            {
+                string? currentJsonString = HttpContext.Session.GetString("current");
+
+                if (!String.IsNullOrEmpty(currentJsonString))
+                {
+                    ChangedSat =  JsonConvert.DeserializeObject<Sattellite>(currentJsonString);
+                }
+                else
+                {
+
+                    if (!string.IsNullOrEmpty(SatName))
+                    {
+                        ChangedSat = Sattellites.First(s => s.ToString() == SatName);
+
+                        HttpContext.Session.SetString("current", JsonConvert.SerializeObject(ChangedSat));
+                    }
+                    else if (Sattellites != null && Sattellites.Count > 0)
+                    {
+                        ChangedSat = Sattellites.First();
+
+                        HttpContext.Session.SetString("current", JsonConvert.SerializeObject(ChangedSat));
+                    }
+                    else
+                    {
+                        MessageHandler = $"File with path {DefaultPath} not found";
+                    }
+                }
+            }
+
+            string? jsonString = HttpContext.Session.GetString("models");
+
+            if (!string.IsNullOrEmpty(jsonString))
+            {
+                Models = JsonConvert.DeserializeObject<List<SignalModel>>(jsonString);
+            }
+
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            // loading data for any operation
+
+
+            //loading path of EXCEL file from session
+            DefaultPath = HttpContext.Session.GetString("path");
+
+            //loading all sattelites from session
+            string? satJsonString = HttpContext.Session.GetString("sat");
+
+            if (!string.IsNullOrEmpty(satJsonString))
+            {
+                Sattellites = JsonConvert.DeserializeObject<List<Sattellite>>(satJsonString);
+            }
+
+            //loading current sattelite from session
+            string? currentJsonString = HttpContext.Session.GetString("current");
+
+            if (!String.IsNullOrEmpty(currentJsonString))
+            {
+                ChangedSat = JsonConvert.DeserializeObject<Sattellite>(currentJsonString);
+            }
+            else
+            {
+                ChangedSat = Sattellites.First();
+            }
+
+
+            //POST Handlers
+
+            //1) for changing current sattelite from all
+            if (IsChangeNewSat)
+            {
+                if (Sattellites != null)
+                {
+                    HttpContext.Session.SetString("satname", SatName);
+
+                    ChangedSat = Sattellites.First(s => s.ToString() == SatName);
+
+                    HttpContext.Session.SetString("current", JsonConvert.SerializeObject(ChangedSat));
+                }
+            }
+
+            //2) for loading .db file
+            if (IsDbFileLoadingOp)
+            {
+
+                string? satName = HttpContext.Session.GetString("satname");
+
+                if (!string.IsNullOrEmpty(satName))
+                {
+                    SatName = satName;
+                }
+
+                if (file != null)
+                {
+                    HttpContext.Session.Remove("models");
+
+                    string fileName = file.FileName;
+
+                    string path = $"{hostEnvironment.WebRootPath}/DB/{fileName}";
+
+                    FileInfo info = new FileInfo(path);
+
+                    if (!info.Exists)
+                    {
+                        FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+                        await file.CopyToAsync(fs);
+
+                        await fs.DisposeAsync();
+
+                        fs.Close();
+                    }
+
+
+                    try
+                    {     
+                        Models = sqliteHandler.GetData(path);
+
+                        excelParser.UpdateDataToSattelite(ChangedSat, Models, DefaultPath);
+
+                        HttpContext.Session.SetString("current", JsonConvert.SerializeObject(ChangedSat));
+
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageHandler = "Problem with loading .db file";
+
+                        Console.WriteLine(ex.Message);
+                    }
+
+                }
+            }
+
+            //3) to set updated data to EXCEL file
+            if (IsAddToExists)
+            {
+
+                string? satName = HttpContext.Session.GetString("satname");
+
+                if (!string.IsNullOrEmpty(satName))
+                {
+                    SatName = satName;
+                }
+
+                if (ChangedSat.Signals.Count() > 0)
+                {
+                    try
+                    {
+                        excelParser.UpdateExcelDocument(DefaultPath, ChangedSat);
+
+                        HttpContext.Session.Remove("sat");
+
+                        HttpContext.Session.Remove("current");
+
+                        Sattellites = excelParser.GetSattelitesWithParamsFromExcel(DefaultPath);
+
+                        if (!string.IsNullOrEmpty(SatName))
+                        {
+                            ChangedSat = Sattellites.First(s => s.ToString() == SatName);
+
+                            HttpContext.Session.SetString("current", JsonConvert.SerializeObject(ChangedSat));
+                        }
+
+                        HttpContext.Session.SetString("sat", JsonConvert.SerializeObject(Sattellites));
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageHandler = $"File with path {DefaultPath} not found";
+
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            IsDbFileLoadingOp = false;
+            IsAddToExists = false;
+            IsChangeNewSat = false;
+
+            return Page();
+        }
+    }
+}

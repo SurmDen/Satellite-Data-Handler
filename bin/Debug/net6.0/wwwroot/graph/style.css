@@ -1,0 +1,289 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(27, 25, 25);
+}
+
+header{
+    padding:10px;
+    background-color: #211f1f;
+}
+
+.tool-box{
+    display:flex;
+    justify-content:flex-start;
+    padding-left: 50px;
+    align-items:center;
+}
+
+.h-main {
+    outline: none;
+    text-decoration: underline;
+    padding: 4px 8px;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+    font-family: Courier New, Courier, monospace;
+    border-radius: 5px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.graph-container {
+    height: calc(100vh - 130px);
+    padding: 20px;
+    padding-left: 80px;
+    padding-bottom: 60px;
+    overflow: hidden;
+    position:relative;
+    padding-right: 0;
+}
+
+.base-lines{
+    border-left: 2px solid greenyellow;
+    border-bottom: 2px solid greenyellow;
+    height: 100%;
+    position: relative;
+}
+
+.vl{
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid white;
+    position: absolute;
+}
+
+.hl{
+    left: 0;
+    right: 0;
+    border-top: 1px solid white;
+    position: absolute;
+}
+
+.dbl{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    top: -20px;
+    left: 0px;
+    color: white;
+    font-weight: 600;
+}
+
+.mhz{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    position: absolute;
+    right: 5px;
+    bottom: -40px;
+    color: white;
+    font-weight: 600;
+}
+
+.vv{
+    position: absolute;
+    color: white;
+    font-size: 15px;
+    bottom: -25px;
+}
+
+.hv{
+    position: absolute;
+    color: white;
+    font-size: 15px;
+    left: -35px;
+}
+
+.val{
+    position:absolute;
+    bottom: 0;
+    width: 2px;
+    background-color:greenyellow;
+    z-index:5;
+    border: 1px solid black;
+}
+
+.val:hover{
+    z-index:5000;
+    border: 2px solid #f9060c
+}
+
+.freq-form {
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+    color: white;
+    font-family: Courier New, Courier, monospace;
+    margin-right: 40px;
+}
+
+.form-group{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-right: 10px;
+}
+
+.form-group label{
+    font-weight:600;
+    margin-right: 5px;
+}
+
+.form-group input{
+    color:white;
+    font-family: Courier New, Courier, monospace;
+    background:none;
+    outline:none;
+    border: 1px solid white;
+    width: 100px;
+    border-radius: 5px;
+    min-height:25px;
+    font-size:18px;
+    font-weight:500
+}
+
+.freq-form button {
+    outline: none;
+    text-decoration: none;
+    padding: 4px 8px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-family: Courier New, Courier, monospace;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-left: 3px;
+    max-height: 30px;
+    background: none;
+}
+
+.signal-info{
+    position: absolute;
+    min-width: 400px;
+    top:10px;
+    background:#12185d;
+    padding:5px;
+    border-radius: 3px;
+    display: none;
+    flex-direction: column;
+    color: white;
+    font-size: 12px;
+    font-family:Courier New, Courier, monospace;
+    z-index: 9999;
+}
+
+.signal-info-left{
+    left:10px;
+}
+
+.signal-info-right {
+    right: 10px;
+}
+
+.signal-info td{
+    padding-right: 15px;
+}
+
+.info-group{
+    display: flex;
+    margin-top: 10px;
+}
+
+.info-title{
+    font-weight: 500;
+    margin-right: 7px;
+}
+
+.vert-point-line{
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background: greenyellow;
+    display: none;
+    z-index: 10;
+}
+
+.hor-point-line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: greenyellow;
+    display: none;
+    z-index: 10;
+}
+
+.current{
+    margin-top: 25px;
+    color:green;
+}
+
+.counter{
+    height: 100%;
+    width:30px;
+    margin-left: 3px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.counter img{
+   height: auto;
+   width: 14px;
+   background: #3d822e;
+   margin-bottom: 1px;
+   border-radius: 3px;
+}
+
+.cur-freq-box{
+    color: white;
+    margin-left: 20px;
+}
+
+.info-value-current{
+    color: #1ee604;
+    font-size: 18px;
+}
+
+.swich {
+    margin-left: 10px;
+    position: relative;
+    width: 65px;
+    height: 25px;
+    border-radius: 15px;
+    border: 2px solid white;
+    background: #1ee604;
+    overflow: hidden;
+}
+
+.swich-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    color: white;
+    font-size: 16px;
+    font-family:Courier New, Courier, monospace;
+}
+
+.swich-road {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #808080;
+    border-radius: 15px;
+    transform: translate(40px);
+    transition: 0.3s ease;
+}
+
+.swich-head{
+    width:25px;
+    height:25px;
+    background:#9f3a3a;
+    border-radius: 50%;
+}
